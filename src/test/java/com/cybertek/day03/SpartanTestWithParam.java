@@ -107,7 +107,6 @@ public class SpartanTestWithParam {
     @Test
     public void test4() {
 
-
         Map<String, Object> queryMap = new HashMap<>();
         queryMap.put("nameContains", "e");
         queryMap.put("gender", "Female");
@@ -117,8 +116,6 @@ public class SpartanTestWithParam {
                                     .and().queryParams(queryMap)
                                     .when()
                                     .get("/api/spartans/search");
-
-
         //verify status code 200
         assertEquals(200 , response.statusCode());
         //verify content type
