@@ -78,7 +78,7 @@ public class SpartanTestWithParam {
 
     }
 
-    @DisplayName("Get request to /api/spartans/serach with Quer Params")
+    @DisplayName("Get request to /api/spartans/search with Query Params")
     @Test
     public void test3() {
         //to receive you logs use .log().all(), or .log().parameters(params)
@@ -103,7 +103,7 @@ public class SpartanTestWithParam {
 
     }
 
-    @DisplayName("Get")
+    @DisplayName("GET request to /api/spartans/search with a Map")
     @Test
     public void test4() {
 
