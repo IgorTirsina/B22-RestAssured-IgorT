@@ -36,7 +36,7 @@ public class SpartanNegativeGetTest {
                 .get("/api/spartans/10");
 
         //verify status code is 406
-        assertEquals(406,response.statusCode());
+        assertEquals(200,response.statusCode());
         //verify content type
         assertEquals("application/xml;charset=UTF-8",response.contentType());
     }
