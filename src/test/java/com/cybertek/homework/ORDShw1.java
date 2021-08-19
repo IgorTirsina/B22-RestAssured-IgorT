@@ -62,21 +62,17 @@ public class ORDShw1 extends HRTestBase {
 
         assertEquals(200 , response.statusCode());
         assertEquals("application/json" , response.contentType());
-
         JsonPath jsonPath = response.jsonPath();
         List<String> jobIDs = jsonPath.getList("items.job_id");
         for(String eachID : jobIDs) {
             assertTrue(eachID.startsWith("SA"));
         }
-
         List<Integer> departmentsIDs = jsonPath.getList("items.department_id");
         for (Integer eachID : departmentsIDs) {
             assertEquals(80 , eachID);
         }
         Integer actualCount = jsonPath.getInt("count");
         assertEquals(25 , actualCount);
-
-
     }
     /**
      * - Given accept type is Json
@@ -98,31 +94,16 @@ public class ORDShw1 extends HRTestBase {
 
         assertEquals(200 , response.statusCode());
         assertEquals("application/json" , response.contentType());
-
         JsonPath jsonPath = response.jsonPath();
         List<Integer> regionIDs = jsonPath.getList("items.region_id");
         for(Integer eachID : regionIDs) {
             assertEquals(3 , eachID);
         }
-
         assertEquals(6 , jsonPath.getInt("count"));
-
         assertFalse(jsonPath.getBoolean("hasMore"));
-
         List<String> expectedCountriesNames = new ArrayList<>(Arrays.asList("Australia","China","India","Japan","Malaysia","Singapore"));
         List<String> actualCountriesNames = jsonPath.getList("items.country_name");
-        System.out.println("actualCountriesNames = " + actualCountriesNames);
-
         assertEquals(expectedCountriesNames , actualCountriesNames);
-
-
-
-
-
-
     }
-
-
-
 
 }
