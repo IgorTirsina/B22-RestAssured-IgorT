@@ -3,8 +3,6 @@ package com.cybertek.utilities;
 import org.junit.jupiter.api.BeforeAll;
 
 import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class HRTestBase {
 
