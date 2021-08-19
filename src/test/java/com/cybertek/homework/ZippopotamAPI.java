@@ -86,7 +86,9 @@ public class ZippopotamAPI extends ZippopotamTestBase {
     @Test
     public void testQ3() {
         Response response = given().accept(ContentType.JSON)
-                            .when().get("/us/va/fairfax");
+                            .and().pathParam("state" , "va")
+                            .and().pathParam("city" , "fairfax")
+                            .when().get("/us/{state}/{city}");
 
         assertEquals(200 , response.statusCode());
         assertEquals("application/json" , response.contentType());
