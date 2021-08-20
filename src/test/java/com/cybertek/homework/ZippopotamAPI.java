@@ -101,10 +101,5 @@ public class ZippopotamAPI extends ZippopotamTestBase {
         for(String eachPostCode : localPostCodes) {
             assertTrue(eachPostCode.startsWith("22"));
         }
-
-
     }
-
-
-
 }
