@@ -2,6 +2,7 @@ package com.cybertek.day05;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import static org.hamcrest.Matchers.*;
 
 public class HamcrestMatchersIntro {
 
+    @DisplayName("Hamcrest for numbers")
     @Test
     public void test01() {
         assertThat(5+5, is(10));
@@ -33,6 +35,7 @@ public class HamcrestMatchersIntro {
 
         assertThat(5+5 , is(greaterThan(9)));
     }
+    @DisplayName("Hamcrest for String")
     @Test
     public void test02() {
         String text = "B22 is learning Hamcrest";
@@ -56,6 +59,7 @@ public class HamcrestMatchersIntro {
         assertThat(str.trim(), emptyString());
     }
 
+    @DisplayName("Hamcrest for collections")
     @Test
     public void test03() {
         List<Integer> listOfNumbers = Arrays.asList(2,4,78,9,23,10,55,32,95,73,1);
@@ -71,11 +75,5 @@ public class HamcrestMatchersIntro {
         //check if all numbers are > 0
         assertThat(listOfNumbers , everyItem(is(greaterThan(0))));
         assertThat(listOfNumbers , everyItem(greaterThan(0)));
-
-
     }
-
-
-
-
 }
