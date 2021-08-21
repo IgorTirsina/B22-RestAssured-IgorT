@@ -71,7 +71,6 @@ public class SpartanAPIvsDB extends SpartanTestBase {
         assertThat(uiMap.get("Gender"), is(dbMap.get("GENDER")));
         assertThat(uiMap.get("Phone"), is(dbMap.get("PHONE")));
 
-
     }
 
     public Map<String, Object> getUIMapForSpartan(String id) {
@@ -90,6 +89,7 @@ public class SpartanAPIvsDB extends SpartanTestBase {
 
         Map<String, Object> myMapForSpartan = new HashMap<>();
 
+        //we dont need more then 4 columns, just {id, name, gender, phone}
         for(int i = 0; i < 4; i++) {
             myMapForSpartan.put(webTableHeaders.get(i).getText().trim() , webTableDataForSpartan.get(i).getText().trim());
             wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//table[@id='myTable']/tbody/tr[10]/td[1]"))));
@@ -98,7 +98,5 @@ public class SpartanAPIvsDB extends SpartanTestBase {
         Driver.getDriver().close();
         return myMapForSpartan;
     }
-
-
 
 }
