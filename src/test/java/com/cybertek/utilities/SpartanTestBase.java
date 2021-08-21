@@ -14,8 +14,8 @@ public abstract class SpartanTestBase {
         baseURI = ConfigReader.get("spartanAPIurl");
 
         String dbUrl = ConfigReader.get("dbUrl");
-        String dbUserName = "Sp";
-        String dbPassword = "SP";
+        String dbUserName = ConfigReader.get("dbUsername");
+        String dbPassword = ConfigReader.get("dbPassword");
 
         DBUtils.createConnection(dbUrl, dbUserName, dbPassword);
     }
