@@ -16,7 +16,6 @@ public class DBUtils {
         try{
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -27,7 +26,6 @@ public class DBUtils {
         try {
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -96,7 +94,6 @@ public class DBUtils {
                 rowList.add(row);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return rowList;
@@ -117,7 +114,6 @@ public class DBUtils {
                 rowList.add(resultSet.getObject(column));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return rowList;
@@ -143,7 +139,6 @@ public class DBUtils {
                 rowList.add(colNameValueMap);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return rowList;
@@ -164,7 +159,6 @@ public class DBUtils {
                 columns.add(rsmd.getColumnName(i));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return columns;
@@ -173,13 +167,11 @@ public class DBUtils {
         try {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         try {
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
