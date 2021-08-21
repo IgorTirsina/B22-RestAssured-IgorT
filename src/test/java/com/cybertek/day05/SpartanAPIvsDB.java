@@ -29,9 +29,9 @@ public class SpartanAPIvsDB extends SpartanTestBase {
     @DisplayName("Get selected Spartan Map")
     @Test
     public void testDB1() {
+        //1.get info from db
+        String query = "SELECT SPARTAN_ID, NAME, GENDER, PHONE FROM SPARTANS WHERE SPARTAN_ID=15";
 
-        String query = "SELECT SPARTAN_ID, NAME, GENDER, PHONE FROM SPARTANS WHERE SPARTAN_ID=15" ;
-//        System.out.println("query.charAt(44) = " + query.charAt(44));
         Map<String, Object> dbMap = DBUtils.getRowMap(query);
         System.out.println("dbMap = " + dbMap);
 
@@ -78,6 +78,7 @@ public class SpartanAPIvsDB extends SpartanTestBase {
         driver.get(ConfigReader.get("spartanAPIurl"));
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
+        //get into the WebData
         WebElement webData = driver.findElement(By.xpath("//a[@href='/spartans']"));
         webData.click();
 
@@ -85,13 +86,15 @@ public class SpartanAPIvsDB extends SpartanTestBase {
         wait.until(ExpectedConditions.visibilityOf(webTable));
         List<WebElement> webTableHeaders = driver.findElements(By.xpath("//table[@id='myTable']/thead/tr/th"));
 
-        List<WebElement> webTableDataForSpartan = driver.findElements(By.xpath("//table[@id='myTable']/tbody/tr//*[.='"+id+"']/../td"));
+        List<WebElement> webTableDataForSpartan = driver.findElements(
+                By.xpath("//table[@id='myTable']/tbody/tr//*[.='"+id+"']/../td"));
 
         Map<String, Object> myMapForSpartan = new HashMap<>();
 
         //we dont need more then 4 columns, just {id, name, gender, phone}
         for(int i = 0; i < 4; i++) {
-            myMapForSpartan.put(webTableHeaders.get(i).getText().trim() , webTableDataForSpartan.get(i).getText().trim());
+            myMapForSpartan.put(webTableHeaders.get(i).getText().trim(),
+                    webTableDataForSpartan.get(i).getText().trim());
             wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//table[@id='myTable']/tbody/tr[10]/td[1]"))));
         }
 
