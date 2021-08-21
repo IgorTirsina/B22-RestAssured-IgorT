@@ -12,6 +12,12 @@ public abstract class SpartanTestBase {
     public static void init(){
         //save baseurl inside this variable so that we dont need to type each http method.< 54.92.248.102 >
         baseURI = ConfigReader.get("spartanAPIurl");
+
+        String dbUrl = ConfigReader.get("dbUrl");
+        String dbUserName = "Sp";
+        String dbPassword = "SP";
+
+        DBUtils.createConnection(dbUrl, dbUserName, dbPassword);
     }
 
 }
