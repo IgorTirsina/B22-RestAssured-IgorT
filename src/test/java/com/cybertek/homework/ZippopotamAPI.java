@@ -35,7 +35,8 @@ public class ZippopotamAPI extends ZippopotamTestBase {
     @Test
     public void testQ1() {
         Response response = given().accept(ContentType.JSON)
-                            .when().get("/US/22031");
+                            .and().pathParam("zipcode", 22031)
+                            .when().get("/US/{zipcode}}");
 
         assertEquals(200 , response.statusCode());
         assertEquals("application/json" , response.contentType());
@@ -63,6 +64,7 @@ public class ZippopotamAPI extends ZippopotamTestBase {
     @Test
     public void testQ2() {
         Response response = given().accept(ContentType.JSON)
+                            .and().pathParam("zipcode", 50000)
                             .when().get("/US/50000");
 
         assertEquals(404 , response.statusCode());

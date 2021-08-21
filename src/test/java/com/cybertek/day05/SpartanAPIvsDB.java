@@ -83,6 +83,7 @@ public class SpartanAPIvsDB extends SpartanTestBase {
         webData.click();
 
         WebElement webTable = driver.findElement(By.xpath("//table[@id='myTable']"));
+        WebElement footer = driver.findElement(By.xpath("//caption[@id='caption']"));
         wait.until(ExpectedConditions.visibilityOf(webTable));
         List<WebElement> webTableHeaders = driver.findElements(By.xpath("//table[@id='myTable']/thead/tr/th"));
 
@@ -95,7 +96,7 @@ public class SpartanAPIvsDB extends SpartanTestBase {
         for(int i = 0; i < 4; i++) {
             myMapForSpartan.put(webTableHeaders.get(i).getText().trim(),
                     webTableDataForSpartan.get(i).getText().trim());
-            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//table[@id='myTable']/tbody/tr[10]/td[1]"))));
+            wait.until(ExpectedConditions.visibilityOf(footer));
         }
 
         Driver.getDriver().close();
