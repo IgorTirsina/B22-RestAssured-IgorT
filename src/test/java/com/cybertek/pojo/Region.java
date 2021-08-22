@@ -17,7 +17,9 @@ public class Region {
     //Json annotations above the  instance variable we want to
     @JsonProperty("region_id")
     private int regionId;
+    @JsonProperty("region_name")
     private String region_name;
+    @JsonProperty("links")
     private List<Links> links;
 
 }
