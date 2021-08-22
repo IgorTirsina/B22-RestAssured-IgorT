@@ -1,11 +1,15 @@
 package com.cybertek.day06;
 
+import com.cybertek.pojo.Search;
 import com.cybertek.pojo.Spartan;
 import com.cybertek.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -21,6 +25,7 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
                 .and().pathParam("id", 15)
                 .when().get("/api/spartans/{id}")
                 .then().statusCode(200)
+                .log().all()
                 .extract().response();
 
         //deserialize from JSON to POJO
@@ -32,6 +37,62 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         System.out.println("spartan15.getName() = " + spartan15.getName());
         System.out.println("spartan15.getGender() = " + spartan15.getGender());
         System.out.println("spartan15.getPhone() = " + spartan15.getPhone());
+
+        //deserialize to custom class using JsonPath
+        JsonPath jsonPath = response.jsonPath();
+        //we need to add the path as a string
+        Spartan sp15 = jsonPath.getObject("" , Spartan.class);
+        System.out.println(sp15);
+
+    }
+
+    @DisplayName("Get one spartan from search endpoint result and use POJO")
+    @Test
+    public void spartanSearchWithPojo() {
+
+        JsonPath jsonPath = given().accept(ContentType.JSON)
+                .and().queryParam("nameContains", "a",
+                        "gender", "Male")
+                .when().get("/api/spartans/search")
+                .then().statusCode(200)
+                .log().all()
+                .extract().jsonPath();
+
+        Spartan sp1 = jsonPath.getObject("content[0]", Spartan.class);
+
+        System.out.println("sp1 = " + sp1);
+
+
+    }
+
+    @Test
+    public void test03() {
+
+        Response response = given().accept(ContentType.JSON)
+                .and().queryParam("nameContains", "a",
+                        "gender", "Male")
+                .when().get("/api/spartans/search")
+                .then().statusCode(200)
+                .extract().response();
+
+        Search searchResult = response.as(Search.class);
+
+        System.out.println(searchResult.getTotalElement());
+
+        System.out.println(searchResult.getContent().get(0).getName());
+
+    }
+
+    @Test
+    public void test04() {
+
+        List<Spartan> spartanList = given().accept(ContentType.JSON)
+                        .and().queryParam("nameContains", "a", "gender", "Male")
+                        .when().get("/api/spartans/search")
+                        .then().statusCode(200)
+                        .extract().jsonPath().getList("content" , Spartan.class);
+
+        System.out.println(spartanList);
 
     }
 
