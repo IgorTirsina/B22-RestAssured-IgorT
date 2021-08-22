@@ -1,5 +1,6 @@
 package com.cybertek.utilities;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
 import static io.restassured.RestAssured.baseURI;
@@ -18,6 +19,10 @@ public abstract class SpartanTestBase {
         String dbPassword = ConfigReader.get("dbPassword");
 
         DBUtils.createConnection(dbUrl, dbUserName, dbPassword);
+    }
+    @AfterAll
+    public static void closeDB() {
+        DBUtils.destroy();
     }
 
 }
