@@ -51,8 +51,8 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
     public void spartanSearchWithPojo() {
 
         JsonPath jsonPath = given().accept(ContentType.JSON)
-                .and().queryParam("nameContains", "a",
-                        "gender", "Male")
+                .and().queryParam("nameContains", "a")
+                .and().queryParam("gender", "Male")
                 .when().get("/api/spartans/search")
                 .then().statusCode(200)
                 .log().all()
@@ -61,6 +61,8 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         Spartan sp1 = jsonPath.getObject("content[0]", Spartan.class);
 
         System.out.println("sp1 = " + sp1);
+        System.out.println("sp1.getName() = " + sp1.getName());
+        System.out.println("sp1.getGender() = " + sp1.getGender());
 
 
     }
@@ -69,8 +71,8 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
     public void test03() {
 
         Response response = given().accept(ContentType.JSON)
-                .and().queryParam("nameContains", "a",
-                        "gender", "Male")
+                .and().queryParam("nameContains", "a")
+                .and().queryParam("gender", "Male")
                 .when().get("/api/spartans/search")
                 .then().statusCode(200)
                 .extract().response();
@@ -82,12 +84,13 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         System.out.println(searchResult.getContent().get(0).getName());
 
     }
-
+    @DisplayName("GET  /spartans/search and save as List<Spartan>")
     @Test
     public void test04() {
 
         List<Spartan> spartanList = given().accept(ContentType.JSON)
-                        .and().queryParam("nameContains", "a", "gender", "Male")
+                        .and().queryParam("nameContains", "a")
+                        .and().queryParam("gender", "Male")
                         .when().get("/api/spartans/search")
                         .then().statusCode(200)
                         .extract().jsonPath().getList("content" , Spartan.class);
