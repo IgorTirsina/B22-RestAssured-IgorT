@@ -27,9 +27,8 @@ public class ORDSPojoGetRequestTest extends HRTestBase {
         Region rg1 = jsonPath.getObject("items[0]" , Region.class);
 
         System.out.println("rg1 = " + rg1);
-
-
-
     }
+
+
 
 }
