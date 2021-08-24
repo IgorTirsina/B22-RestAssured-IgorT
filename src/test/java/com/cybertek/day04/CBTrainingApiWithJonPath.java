@@ -1,6 +1,7 @@
 package com.cybertek.day04;
 
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -41,15 +42,20 @@ public class CBTrainingApiWithJonPath {
                             .when()
                                     .get("/student/{student_id}");
 
+        JsonPath jsonPath = response.jsonPath();
+
         assertEquals(200, response.statusCode());
         assertEquals("application/json;charset=UTF-8" , response.contentType());
+        assertFalse(response.header("Date").isEmpty());
+        assertTrue(response.headers().hasHeaderWithName("Date"));
 
-
-
-
-
-
-
+        assertEquals("Vera" , jsonPath.getString("students[0].firstName"));
+        assertEquals(14 , jsonPath.getInt("students[0].batch"));
+        assertEquals("12" , jsonPath.getString("students[0].section"));
+        assertEquals("aaa@gmail.com" , jsonPath.getString("students[0].contact.emailAddress"));
+        assertEquals("Cybertek", jsonPath.getString("students[0].company.companyName"));
+        assertEquals("IL" , jsonPath.getString("students[0].company.address.state"));
+        assertEquals(60606 , jsonPath.getInt("students[0].company.address.zipCode"));
 
     }
 
