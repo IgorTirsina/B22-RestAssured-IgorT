@@ -24,6 +24,7 @@ public class CBTrainingApiPOJO extends CBTraining {
                 .statusCode(200)
                 .and().contentType("application/json;charset=UTF-8")
                 .and().header("Content-Encoding", is("gzip"))
+                .and().header("Date", is(notNullValue()))
                 .extract().jsonPath();
 
         Students student = jsonPath.getObject("students[0]", Students.class);
