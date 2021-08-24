@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.baseURI;
 public abstract class CBTraining {
 
     @BeforeAll
-    public void init() {
+    public static void init() {
         baseURI = ConfigReader.get("CBTrainingAPI");
     }
 

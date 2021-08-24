@@ -42,7 +42,7 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         JsonPath jsonPath = response.jsonPath();
         //we need to add the path as a string
         Spartan sp15 = jsonPath.getObject("" , Spartan.class);
-        System.out.println(sp15);
+        System.out.println("sp15"+sp15);
 
     }
 
