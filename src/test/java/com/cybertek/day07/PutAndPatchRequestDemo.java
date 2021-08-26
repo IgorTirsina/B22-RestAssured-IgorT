@@ -41,7 +41,7 @@ public class PutAndPatchRequestDemo extends SpartanTestBase {
                 .when().get("/api/spartans/{id}")
                 .then().extract().response();
 
-        assertThat(putRequestMap.get("phone"), is(response.path("")));
+        assertThat(putRequestMap.get("phone"), is((Long)response.path("phone")));
 
 
     }
@@ -55,8 +55,8 @@ public class PutAndPatchRequestDemo extends SpartanTestBase {
         putRequestMap.put("name","Peter");
 
         given().contentType(ContentType.JSON) //hey api I am sending JSON body
-                .body(putRequestMap).log().body()
-                .and().pathParam("id",388)
+                .body(putRequestMap).log().all()
+                .and().pathParam("id",112)
                 .when().patch("/api/spartans/{id}")
                 .then()
                 .statusCode(204);
