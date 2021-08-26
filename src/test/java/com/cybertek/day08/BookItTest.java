@@ -1,6 +1,7 @@
 package com.cybertek.day08;
 
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +33,43 @@ public class BookItTest {
        .then()
                .statusCode(200)
                .log().all();
+
+       JsonPath jsonPath =  given().accept(ContentType.JSON)
+                .and().auth().basic("sbirdbj@fc2.com", "asenorval")
+                .when()
+                .get("/sign")
+                .then()
+                .extract().jsonPath();
+
+       jsonPath.prettyPrint();
+//        String token ="Bearer " + jsonPath.getString("accessToken");
+//
+//        System.out.println("token = " + token);
+
+    }
+
+    @Test
+    public void test02() {
+        System.out.println(getBearerToken("sbirdbj@fc2.com", "asenorval"));
+
+
+    }
+
+    public static String getBearerToken(String email, String password) {
+        baseURI = "https://cybertek-reservation-api-qa.herokuapp.com";
+
+        JsonPath jsonPath =  given().accept(ContentType.JSON)
+                .and().queryParam("email", email)
+                .and().queryParam("password", password)
+                .when()
+                .get("/sign")
+                .then()
+                .extract().jsonPath();
+
+        String token ="Bearer " + jsonPath.getString("accessToken");
+
+        return token;
+
 
     }
 
