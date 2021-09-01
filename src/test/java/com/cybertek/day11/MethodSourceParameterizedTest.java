@@ -10,11 +10,6 @@ import java.util.Map;
 
 public class MethodSourceParameterizedTest {
 
-//    public static List<String> getNames() {
-//        List<String> nameList = Arrays.asList("Igor", "Maria", "Parvin", "Dan", "Murodil", "Alex", "John");
-//        return nameList;
-//
-//    }
 
     @ParameterizedTest
     @MethodSource("getNames")
@@ -28,7 +23,7 @@ public class MethodSourceParameterizedTest {
         //DB
         //Excel
         //other APIs
-
+//        List<String> nameList = Arrays.asList("Igor", "Maria", "Parvin", "Dan", "Murodil", "Alex", "John");
         List<String> nameList = Arrays.asList("Parvin","Nasim","mohamad","Nadir","Saim","Gurhan","Murodil");
         return  nameList;
     }

@@ -27,7 +27,7 @@ public class ExcelUtil {
             // Access the required test data sheet
             workBook = WorkbookFactory.create(ExcelFile);
             workSheet = workBook.getSheet(sheetName);
-            // check if sheet is null or not. null means  sheetname was wrong
+            // check if sheet is null or not. null means  sheetName was wrong
             //Assert.assertNotNull(workSheet, "Sheet: \""+sheetName+"\" does not exist\n");
 
         } catch (Exception e) {
